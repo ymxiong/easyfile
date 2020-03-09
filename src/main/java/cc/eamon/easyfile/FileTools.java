@@ -1,9 +1,6 @@
 package cc.eamon.easyfile;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,5 +141,29 @@ public class FileTools {
         return file;
     }
 
+    /**
+     * 输入流转字符串
+     * @param is 输入流
+     * @return 字符串
+     * @throws IOException IO错误
+     */
+    public static String inputStream2Str(InputStream is) throws IOException {
+        StringBuffer sb;
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(is));
+
+            sb = new StringBuffer();
+
+            String data;
+            while ((data = br.readLine()) != null) {
+                sb.append(data).append("\n");
+            }
+        } finally {
+            br.close();
+        }
+
+        return sb.toString();
+    }
 
 }
